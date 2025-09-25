@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Excel Data</title>
+    <!-- Bootstrap CSS (optional, for styling) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        table {
+            font-size: 14px;
+        }
+        th, td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Excel Data</h2>
+        <a href="{% url 'index' %}" class="btn btn-primary mb-3">Back to Upload</a>
+        
+        {% if page_obj %}
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Voucher Type</th>
+                    <th>Sales ID</th>
+                    <th>State</th>
+                    <th>Zone</th>
+                    <th>Branch</th>
+                    <th>Route</th>
+                    <th>Party Name</th>
+                    <th>Category</th>
+                    <th>Payment Type</th>
+                    <th>Created Date</th>
+                    <th>Voucher Date</th>
+                    <th>Voucher No</th>
+                    <th>Bill Type</th>
+                    <th>Salesman</th>
+                    <th>Taxable</th>
+                    <th>CGST</th>
+                    <th>SGST</th>
+                    <th>IGST</th>
+                    <th>Voucher Amount</th>
+                    <th>Discount</th>
+                    <th>Realisable Amount</th>
+                    <th>Receive Amount</th>
+                    <th>Difference</th>
+                    <th>RMODE</th>
+                    <th>Group Name</th>
+                    <th>Item Code</th>
+                    <th>Tax %</th>
+                    <th>Quantity</th>
+                    <th>Free Quantity</th>
+                    <th>Total Amount</th>
+                    <th>Free Amount</th>
+                    <th>Rate</th>
+                    <th>Disc Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in page_obj %}
+                <tr>
+                    <td>{{ data.voucher_type|default:"-" }}</td>
+                    <td>{{ data.sales_id|default:"-" }}</td>
+                    <td>{{ data.state_name|default:"-" }}</td>
+                    <td>{{ data.zone|default:"-" }}</td>
+                    <td>{{ data.branch_name|default:"-" }}</td>
+                    <td>{{ data.route|default:"-" }}</td>
+                    <td>{{ data.party_name|default:"-" }}</td>
+                    <td>{{ data.category_name|default:"-" }}</td>
+                    <td>{{ data.payment_type|default:"-" }}</td>
+                    <td>{{ data.created_date|date:"Y-m-d"|default:"-" }}</td>
+                    <td>{{ data.voucher_date|date:"Y-m-d"|default:"-" }}</td>
+                    <td>{{ data.voucher_no|default:"-" }}</td>
+                    <td>{{ data.bill_type|default:"-" }}</td>
+                    <td>{{ data.salesman|default:"-" }}</td>
+                    <td>{{ data.taxable|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.cgst|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.sgst|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.igst|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.voucher_amt|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.discount|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.realisable_amount|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.receive_amt|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.difference|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.rmode|default:"-" }}</td>
+                    <td>{{ data.group_name|default:"-" }}</td>
+                    <td>{{ data.item_code|default:"-" }}</td>
+                    <td>{{ data.tax_perc|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.qty|default:"-" }}</td>
+                    <td>{{ data.free_qty|default:"-" }}</td>
+                    <td>{{ data.total_amt|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.free_amount|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.rate|floatformat:2|default:"-" }}</td>
+                    <td>{{ data.disc_amount|floatformat:2|default:"-" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="33">No data available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination Controls -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1" class="btn btn-outline-primary">&laquo; First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">Previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary">Last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        {% else %}
+        <p>No data available in the database.</p>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS (optional, for responsive behavior) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
