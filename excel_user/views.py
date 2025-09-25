@@ -43,7 +43,7 @@ def index(request):
                     'RMODE', 'GroupName', 'ItemCOde', 'TaxPerc', 'qty', 'Freeqty',
                     'TotalAmt', 'FreeAmount', 'Rate', 'DiscAmount','Helper 1', 'KL MT OUTLETS', 
                     'TN MT OUTLETS', 'Category', 'NEW SKU','Division', 'Customer name', 
-                    'District for milk', 'District for Dashboard','ZONE FOR MT', 'GROUPING FOR ITEM'
+                    'District for milk', 'District for Dashboard','ZONE FOR MT'
                 ]
 
 
@@ -116,7 +116,7 @@ def index(request):
                                'PartyName', 'CategoryName', 'PaymentType', 'VoucherNo',
                                'Bill Type', 'Salesman', 'RMODE', 'GroupName', 'ItemCOde''Helper 1', 'KL MT OUTLETS', 
                                'TN MT OUTLETS', 'Category', 'NEW SKU','Division', 'Customer name', 
-                               'District for milk', 'District for Dashboard','ZONE FOR MT', 'GROUPING FOR ITEM'
+                               'District for milk', 'District for Dashboard','ZONE FOR MT'
                                ]
                     for col in str_cols:
                         if col in df.columns:
@@ -190,8 +190,7 @@ def index(request):
                                     customer_name=row.get('Customer name'),
                                     district_milk=row.get('District for milk'),
                                     district_dashboard=row.get('District for Dashboard'),
-                                    zone_mt=row.get('ZONE FOR MT'),
-                                    grouping_item=row.get('GROUPING FOR ITEM')
+                                    zone_mt=row.get('ZONE FOR MT')
                                 )
                                 excel_data_objects.append(excel_data)
                             except Exception as e:
@@ -274,8 +273,7 @@ def index(request):
                                         customer_name=row.get('Customer name'),
                                         district_milk=row.get('District for milk'),
                                         district_dashboard=row.get('District for Dashboard'),
-                                        zone_mt=row.get('ZONE FOR MT'),
-                                        grouping_item=row.get('GROUPING FOR ITEM')
+                                        zone_mt=row.get('ZONE FOR MT')
                                     )
                                     excel_data_objects.append(excel_data)
                                 except Exception as e:
@@ -334,4 +332,5 @@ def view_excel_data(request):
     
     return render(request, 'user_excel/view_data.html', {
         'page_obj': page_obj,
+
     })
