@@ -45,7 +45,7 @@ class ExcelData(models.Model):
     district_milk = models.CharField(max_length=200, null=True, blank=True)
     district_dashboard = models.CharField(max_length=200, null=True, blank=True)
     zone_mt = models.CharField(max_length=200, null=True, blank=True)
-    grouping_item = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
+
         db_table = 'ExcelData'
